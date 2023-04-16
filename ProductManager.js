@@ -21,9 +21,6 @@ async getAll(){
 }
 
 
-
-
-
 async getProductById(id) {
   try{
   let products = await this.getAll()

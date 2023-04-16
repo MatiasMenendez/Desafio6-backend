@@ -19,9 +19,10 @@ app.get('/products', async (req, res) => {
     if(!req.query.limit){
     res.json( await newProducts.getAll())
    } else{
-    return res.send()
+    for(let i=1; i <= req.query.limit; i++){
+        res.json( await newProducts.getProductById(i))
+    }
    }
-
 })
 
 

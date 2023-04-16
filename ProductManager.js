@@ -26,35 +26,17 @@ async getAll(){
 
 async getProductById(id) {
   try{
-  const data = await fs.promises.readFile(this.path, "utf-8");
-  const products = JSON.parse(data);
-  const foundProduct = products.find(item => item.idProduct === id);
-      if(foundProduct === true){
-    return foundProduct;
-   } else {
-    console.log(foundProduct)
+  let products = await this.getAll()
+  products = products.filter(item => item.idProduct == id)
+  if (products.length) {
+      return products[0]
+  } else { 
+      console.log("product not founded")
+  }
+}
+catch (err) {
+  console.log (err)
 }}
- catch(err){
-  console.log(err)
- }
 }
-
-
-
-//getProductById (id) {
-  //const data = fs.readFileSync('Products.JSON');
-  //this.products = JSON.parse(data);
-  //const foundProduct = this.products.find(item => item.idProduct === id)
-   //if(foundProduct){
-    //console.log(foundProduct)
-   //} else {
-    //console.log("Not found")
-   //}
-  //}
-
-
-
-}
-
 
 module.exports = ProductManager;

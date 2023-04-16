@@ -17,9 +17,9 @@ const pm = new ProductManager("Products.JSON")
 app.get('/products', async (req, res) => {
     const newProducts = pm;
     if(!req.query.limit){
-    res.json(await newProducts.getAll())
+    res.json( await newProducts.getAll())
    } else{
-    return res.send(console.log("holi"))
+    return res.send()
    }
 
 })
@@ -28,5 +28,6 @@ app.get('/products', async (req, res) => {
 
 app.get('/product/:id', async (req, res) => {
     const newProducts = pm;
-    res.json(await newProducts.getProductById(req.params.id))
+    let product = await newProducts.getProductById(req.params.id)
+    res.json(product)
 })

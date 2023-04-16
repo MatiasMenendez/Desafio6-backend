@@ -19,7 +19,7 @@ app.get('/products', async (req, res) => {
     if(!req.query.limit){
     res.json(await newProducts.getAll())
    } else{
-    return res.send()
+    return res.send(console.log("holi"))
    }
 
 })

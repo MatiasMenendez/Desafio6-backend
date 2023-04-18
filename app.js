@@ -3,12 +3,12 @@ const express = require ('express')
 const ProductManager = require ('./ProductManager')
 
 const app = express()
-
 const PORT = 8080
-
 const server = app.listen(PORT, () =>{
     console.log(`Server running at port ${PORT}`)
 })
+
+app.use(express.urlencoded({extended:true}))
 
 server.on('error', (error) => console.log(`Error en el servidor ${error}`))
 
@@ -19,9 +19,7 @@ app.get('/products', async (req, res) => {
     if(!req.query.limit){
     res.json( await newProducts.getAll())
    } else{
-    for(let i=1; i <= req.query.limit; i++){
-        res.json( await newProducts.getProductById(i))
-    }
+    res.json( await newProducts.getFiltered(req.query.limit))
    }
 })
 

@@ -20,6 +20,17 @@ async getAll(){
   }
 }
 
+async getFiltered(id) {
+  try{
+    let products = await this.getAll()
+    products = products.filter(item => item.idProduct <= id)
+    return products
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
 
 async getProductById(id) {
   try{

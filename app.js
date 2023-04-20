@@ -1,32 +1,17 @@
-const express = require ('express')
+const express = require('express');
 
-const ProductManager = require ('./ProductManager')
-
-const app = express()
+const routerp = require('./routes/products.routes');
+//const routerc = require('./routes/cart.routes');
 const PORT = 8080
-const server = app.listen(PORT, () =>{
-    console.log(`Server running at port ${PORT}`)
-})
 
-app.use(express.urlencoded({extended:true}))
+const server = express();
 
-server.on('error', (error) => console.log(`Error en el servidor ${error}`))
+server.use(express.json())
+server.use(express.urlencoded({extended:true}))
 
-const pm = new ProductManager("Products.JSON")
+server.use('/api', routerp);
+//server.use('/api', routerc);
 
-app.get('/products', async (req, res) => {
-    const newProducts = pm;
-    if(!req.query.limit){
-    res.json( await newProducts.getAll())
-   } else{
-    res.json( await newProducts.getFiltered(req.query.limit))
-   }
-})
-
-
-
-app.get('/product/:id', async (req, res) => {
-    const newProducts = pm;
-    let product = await newProducts.getProductById(req.params.id)
-    res.json(product)
-})
+server.listen(PORT, () =>{
+    console.log(`Server listening at port ${PORT}`)
+});

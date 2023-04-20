@@ -61,7 +61,6 @@ catch (err) {
   console.log (err)
 }}
 
-
 //bien pero falta que genere error si no tiene todos los parametros
 async addProduct(newProduct) {
   try{
